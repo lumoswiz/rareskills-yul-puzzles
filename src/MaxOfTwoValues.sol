@@ -4,7 +4,12 @@ pragma solidity ^0.8.13;
 contract MaxOfTwoValues {
     function main(uint256 x, uint256 y) external pure returns (uint256) {
         assembly {
-            // your code here
+            if gt(x, y) {
+                mstore(0x00, x)
+                return(0x00, 0x20)
+            }
+            mstore(0x00, y)
+            return(0x00, 0x20)
             // return the maximum value between x and y
             // assume the two values are not the same
             // Hint: use If-statement to check
