@@ -12,8 +12,6 @@ contract MaxOfArrayTest is Test {
     }
 
     function test_MaxOfArray1(uint256[] memory x) public {
-        vm.assume(x.length > 0);
-
         if (x.length == 0) {
             vm.expectRevert();
             c.main(x);
