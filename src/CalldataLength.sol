@@ -4,7 +4,8 @@ pragma solidity ^0.8.13;
 contract CalldataLength {
     function main(bytes calldata) external pure returns (uint256) {
         assembly {
-            // your code here
+            mstore(0x00, calldatasize())
+            return(0x00, 0x20)
             // return the length of the calldata
             // hint: calldatasize opcode
         }
