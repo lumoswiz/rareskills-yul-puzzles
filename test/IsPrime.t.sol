@@ -12,8 +12,19 @@ contract IsPrimeTest is Test {
     }
 
     function test_IsPrime() public {
-        uint8[10] memory a = [23, 30, 15, 17, 19, 12, 18, 31, 1, 43];
-        bool[10] memory b = [true, false, false, true, true, false, false, true, false, true];
+        uint8[10] memory a = [23, 30, 15, 17, 25, 12, 18, 121, 1, 43];
+        bool[10] memory b = [
+            true,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true
+        ];
 
         for (uint256 i; i < 10; i++) {
             bool r = c.main(uint256(a[i]));
