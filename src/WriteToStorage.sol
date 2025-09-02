@@ -6,7 +6,7 @@ contract WriteToStorage {
 
     function main(uint256 x) external {
         assembly {
-            // your code here
+            sstore(0x00, x)
             // store the value `x` in the storage variable `writeHere`
             // Hint: use sstore opcode
         }
