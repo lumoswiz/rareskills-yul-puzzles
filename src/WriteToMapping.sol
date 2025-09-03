@@ -6,7 +6,8 @@ contract WriteToMapping {
 
     function main(uint256 index, uint256 value) external {
         assembly {
-            // your code here
+            mstore(0x00, index)
+            sstore(keccak256(0x00, 0x40), value)
             // store `value` at the `index` in the mapping `writeHere`
             // Hint: https://www.rareskills.io/post/solidity-dynamic
         }
