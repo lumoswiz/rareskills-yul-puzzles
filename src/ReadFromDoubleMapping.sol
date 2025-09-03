@@ -10,7 +10,15 @@ contract ReadFromDoubleMapping {
 
     function main(address user, address token) external view returns (uint256) {
         assembly {
-            // your code here
+            mstore(0x00, user)
+            let innerHash := keccak256(0x00, 0x40)
+            mstore(0x20, innerHash)
+
+            mstore(0x00, token)
+            let s := keccak256(0x00, 0x40)
+
+            mstore(0x00, sload(s))
+            return(0x00, 0x20)
             // read and return the `token` balance of `user` in the double mapping `balances`
             // Hint: https://www.rareskills.io/post/solidity-dynamic
         }
