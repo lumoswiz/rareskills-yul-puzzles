@@ -6,7 +6,9 @@ contract PushToDynamicArray {
 
     function main(uint256 newValue) external {
         assembly {
-            // your code here
+            let s := add(0x06, keccak256(0x00, 0x20))
+            sstore(s, newValue)
+            sstore(0x00, 0x07)
             // push the newValue to the dynamic array `pushToMe`
             // Hint: https://www.rareskills.io/post/solidity-dynamic
         }
