@@ -6,7 +6,11 @@ contract PopFromDynamicArray {
 
     function main() external {
         assembly {
-            // your code here
+            let s := add(0x05, keccak256(0x00, 0x20))
+            let v := sload(s)
+
+            sstore(s, 0x00)
+            sstore(0x00, 0x05)
             // pop the last element from the dynamic array `popFromMe`
             // dont forget to clean the popped element's slot.
             // Hint: https://www.rareskills.io/post/solidity-dynamic
