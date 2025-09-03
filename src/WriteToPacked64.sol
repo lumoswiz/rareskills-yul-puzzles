@@ -9,7 +9,12 @@ contract WriteToPacked64 {
 
     function main(uint256 v) external {
         assembly {
-            // your code here
+            let m := sub(shl(64, 1), 1)
+            let mask := shl(64, m)
+            let c := and(sload(0), not(mask))
+            let pv := shl(64, and(v, m))
+            sstore(0, or(c, pv))
+
             // change the value of `writeHere` storage variable to `v`
             // be careful not to alter the value of `someValue` variable
         }
