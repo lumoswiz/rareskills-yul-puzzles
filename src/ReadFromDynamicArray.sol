@@ -10,7 +10,8 @@ contract ReadFromDynamicArray {
 
     function main(uint256 index) external view returns (uint256) {
         assembly {
-            // your code here
+            mstore(0x00, sload(add(index, keccak256(0x00, 0x20))))
+            return(0x00, 0x20)
             // read the value at the `index` in the dynamic array `readMe`
             // and return it
             // Assume `index` is <= to the length of readMe
