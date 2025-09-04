@@ -5,9 +5,13 @@ contract EventWithIndexedData {
     // EMIT ME!!!
     event MyEvent(address indexed emitter, bytes32 indexed id, uint256 num);
 
+    bytes32 private constant _MY_EVENT_SIGNATURE =
+        0x044d482819499c9d5fde1245ce63873b1259fc52fc78651ccdcdf7392637d374;
+
     function main(address emitter, bytes32 id, uint256 num) external {
         assembly {
-            // your code here
+            mstore(0x00, num)
+            log3(0x00, 0x20, _MY_EVENT_SIGNATURE, emitter, id)
             // emit the `MyEvent(address,bytes32,uint256)` event
             // the event has three components: two indexed fields (`emitter`, `id`) and one non-indexed field (`num`)
             // use `log3` to emit the event with three topics:
