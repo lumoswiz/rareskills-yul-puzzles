@@ -19,7 +19,15 @@ contract AnonymonusEventWithComplexData {
 
     function main(address emitter, bytes32 id, Person memory person) external {
         assembly {
-            // your code here
+            let personOff := calldataload(0x44)
+            let personPtr := add(0x04, personOff)
+            let personLen := sub(calldatasize(), personPtr)
+
+            let p := mload(0x40)
+            mstore(p, 0x20)
+            calldatacopy(add(p, 0x20), personPtr, personLen)
+            log3(p, add(0x20, personLen), 0x00, emitter, id)
+
             // emit the `MyEvent(address,bytes32,(string,uint256,uint8))` event.
             // Anonymous events don't have the event signature (topic0) included.
             // Hint: how the `Person` struct is encoded in mem:
