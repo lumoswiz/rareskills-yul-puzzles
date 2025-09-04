@@ -5,9 +5,13 @@ contract EventWithData {
     // EMIT ME!!!
     event MyEvent(uint256 number);
 
+    bytes32 private constant _MY_EVENT_SIGNATURE =
+        0x6c2b4666ba8da5a95717621d879a77de725f3d816709b9cbe9f059b8f875e284;
+
     function main(uint256 _number) external {
         assembly {
-            // your code here
+            mstore(0x00, _number)
+            log1(0x00, 0x20, _MY_EVENT_SIGNATURE)
             // emit the `MyEvent(uint256)` event
             // the event has one topic and one non-indexed field:
             //   topic 0: The event signature hash (keccak256("MyEvent(uint256)"))
