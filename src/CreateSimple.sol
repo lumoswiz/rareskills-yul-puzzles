@@ -2,14 +2,19 @@
 pragma solidity ^0.8.13;
 
 contract CreateSimple {
-    function main(bytes memory deploymentBytecode) external returns (address addr) {
+    function main(
+        bytes memory deploymentBytecode
+    ) external returns (address addr) {
         assembly {
-            // your code here
+            addr := create(
+                0,
+                add(deploymentBytecode, 0x20),
+                mload(deploymentBytecode)
+            )
             // create a contract using the deploymentBytecode
             // return the address of the contract
             // hint: use the `create` opcode
             // hint: the bytecode is already in memory
-
         }
     }
 }
