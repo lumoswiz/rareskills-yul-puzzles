@@ -2,9 +2,16 @@
 pragma solidity ^0.8.13;
 
 contract CreateSimplePayable {
-    function main(uint256 dummy, bytes memory deploymentBytecode) external payable returns (address addr) {
+    function main(
+        uint256 dummy,
+        bytes memory deploymentBytecode
+    ) external payable returns (address addr) {
         assembly {
-            // your code here
+            addr := create(
+                callvalue(),
+                add(deploymentBytecode, 0x20),
+                mload(deploymentBytecode)
+            )
             // create a contract using the deploymentBytecode
             // return the address of the contract
             // create it with the msg.value
