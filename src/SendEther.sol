@@ -2,10 +2,9 @@
 pragma solidity ^0.8.13;
 
 contract SendEther {
-
     function main(address payable to, uint256 amount) external payable {
         assembly {
-            // your code here
+            let r := call(gas(), to, amount, 0x00, 0x00, 0x00, 0x00)
             // send `amount` of ether to `to`
             // assume `amount` is less than or equal to the contract balance
             // assume `amount` is in wei
