@@ -41,7 +41,11 @@ pragma solidity ^0.8.13;
 contract DeployOneByte {
     function main() external returns (address) {
         assembly {
-            // your code here
+            let dbc := 0x6001600c60003960016000f300
+            mstore(0x00, dbc)
+            let addr := create(0, 0x13, 13)
+            mstore(0x20, addr)
+            return(0x20, 0x40)
             // create a contract that has a single byte in its code
             // return the address of the contract
             // hint: use the bytecode in the comment above
